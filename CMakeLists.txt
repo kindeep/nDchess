@@ -3,4 +3,4 @@ project(nDchess)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(nDchess main.cpp)
+add_executable(nDchess main.cpp board.cpp board.h coordinate.cpp coordinate.h)
