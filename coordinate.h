@@ -18,12 +18,7 @@ public:
      * @param index
      * @return
      */
-    int get(int index) {
-        if(index >=0 && index < val.size()) {
-            return val.at(index);
-        }
-        else return 0;
-    }
+    int get(int index);
 
 };
 

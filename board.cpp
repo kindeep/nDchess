@@ -4,6 +4,7 @@
 
 #include "board.h"
 #include <cmath>
+#include <iostream>
 
 board::~board() = default;
 
@@ -29,22 +30,14 @@ int board::get(coordinate c) {
         actCoord[index] = c.get(index);
     }
 
-    /*
-     * space_size * space_dimension places.
-     *
-     * go to space_dimensional coordinate * (space_size * (space_dimension -1)
-     */
+    int linear_location = 0;
 
     for (int i = space_dimension - 1; i >= 0; i--) {
         // traversing through coordinates backwards
-
-
-
-
+        linear_location += actCoord[i] * (int) pow(8, i);
     }
 
-    // actCoordinate is now a point in (space_dimension)al space.
-    // missing vals in a been replaced with 0, and extra values ignored.
+    return board_data[linear_location];
 }
 
 void board::set(coordinate c, int value) {
@@ -53,8 +46,73 @@ void board::set(coordinate c, int value) {
     for (int index = 0; index < space_dimension; index++) {
         actCoord[index] = c.get(index);
     }
-
     // actCoordinate is now a point in (space_dimension)al space.
     // missing vals in a been replaced with 0, and extra values ignored.
+}
+
+std::string board::board_as_string() {
+
+    std::string result;
+
+    int lbreak = 0;
+    for (int val: board_data) {
+        if (lbreak >= space_size) {
+            std::cout << "Whaaat" << std::endl;
+            result += '\n';
+            lbreak = 0;
+        };
+        result += " " + piece_as_string(val) + " ";
+        lbreak++;
+    }
+
+    return result;
+}
+
+std::string board::piece_as_string(int piece) {
+    std::string rep;
+    switch (piece) {
+        case QUEEN_B:
+            rep = "QUB";
+            break;
+        case KING_B:
+            rep = "KIB";
+            break;
+        case ROOK_B:
+            rep = "RKB";
+            break;
+        case BISHOP_B:
+            rep = "BIB";
+            break;
+        case PAWN_B:
+            rep = "PWB";
+            break;
+        case KNIGHT_B:
+            rep = "KNB";
+            break;
+        case QUEEN_W:
+            rep = "QUW";
+            break;
+        case KING_W:
+            rep = "KIW";
+            break;
+        case ROOK_W:
+            rep = "RKW";
+            break;
+        case BISHOP_W:
+            rep = "BIW";
+            break;
+        case PAWN_W:
+            rep = "PWW";
+            break;
+        case KNIGHT_W:
+            rep = "KNW";
+            break;
+        case EMPTY:
+            rep = "XXX";
+            break;
+        default:
+            rep = "???";
+    }
+    return rep;
 
 }

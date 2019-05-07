@@ -8,6 +8,11 @@
 #include "coordinate.h"
 #include <array>
 #include <vector>
+#include <string>
+
+enum PIECES {
+    EMPTY, KING_W, QUEEN_W, ROOK_W, BISHOP_W, PAWN_W, KNIGHT_W, KING_B, QUEEN_B, ROOK_B, BISHOP_B, PAWN_B, KNIGHT_B
+};
 
 /**
  *
@@ -52,6 +57,11 @@ public:
      * @param value
      */
     void set(coordinate c, int value);
+
+    std::string board_as_string();
+
+    std::string piece_as_string(int piece);
+
 };
 
 #endif //NDCHESS_BOARD_H
