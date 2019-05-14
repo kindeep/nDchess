@@ -9,6 +9,8 @@
 #include <array>
 #include <vector>
 #include <string>
+#include <cmath>
+#include <iostream>
 
 enum PIECES {
     EMPTY, KING_W, QUEEN_W, ROOK_W, BISHOP_W, PAWN_W, KNIGHT_W, KING_B, QUEEN_B, ROOK_B, BISHOP_B, PAWN_B, KNIGHT_B
@@ -50,6 +52,8 @@ public:
      */
     int get(coordinate c);
 
+    void foreach_c(coordinate crd_ltr, void (*f)(coordinate crd));
+
     /**
      * set's the status of coordinate in the 3d grid.
      *
@@ -61,6 +65,10 @@ public:
     std::string board_as_string();
 
     std::string piece_as_string(int piece);
+
+    void setAll(int dim, int pos, int val);
+
+    void setAll(coordinate crd_ltr, int val);
 
 };
 
