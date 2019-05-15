@@ -17,45 +17,46 @@ board::board(int dimension) {
         board_data.push_back(EMPTY);
     }
 
+    // Initialize Pawns
     setAll(coordinate({1}, 1), PAWN_W);
     setAll(coordinate({6}, 1), PAWN_B);
 
+    // Initialize Rooks
     setAll(coordinate({0, 0}, 2), ROOK_W);
     setAll(coordinate({0, 7}, 2), ROOK_W);
     setAll(coordinate({7, 0}, 2), ROOK_B);
     setAll(coordinate({7, 7}, 2), ROOK_B);
 
+    // Initialize Knights
     setAll(coordinate({0, 1}, 2), KNIGHT_W);
     setAll(coordinate({0, 6}, 2), KNIGHT_W);
     setAll(coordinate({7, 1}, 2), KNIGHT_B);
     setAll(coordinate({7, 6}, 2), KNIGHT_B);
 
+    // Initialize Bishops
     setAll(coordinate({0, 2}, 2), BISHOP_W);
     setAll(coordinate({0, 5}, 2), BISHOP_W);
     setAll(coordinate({7, 2}, 2), BISHOP_B);
     setAll(coordinate({7, 5}, 2), BISHOP_B);
 
+    // Initialize Queens
     setAll(coordinate({0, 3}, 2), QUEEN_W);
     setAll(coordinate({0, 4}, 2), QUEEN_W);
     setAll(coordinate({7, 3}, 2), QUEEN_B);
     setAll(coordinate({7, 4}, 2), QUEEN_B);
 
+    // Initialize Kings
     std::vector<int> king_w = {0, 4};
+    king_w.reserve(dimension);
     std::vector<int> king_b = {7, 4};
-
+    king_b.reserve(dimension);
     for (int i = 0; i < dimension - 2; i++) {
         king_w.push_back(0);
         king_b.push_back(7);
     }
 
-    coordinate king_w_coord = coordinate(king_w, dimension);
-    coordinate king_b_coord = coordinate(king_b, dimension);
-
-//    set(coordinate({0, 4}), KING_W);
-    set(king_w_coord, KING_W);
-    set(king_b_coord, KING_B);
-
-//    setAll({2}, PAWN_B);
+    set(coordinate(king_w, dimension), KING_W);
+    set(coordinate(king_b, dimension), KING_B);
 }
 
 board::board(int dimension, std::vector<int> array) {

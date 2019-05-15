@@ -1,0 +1,30 @@
+King
+====
+Change one of any coordinate by 1 for a move. Cannot move to a position where opponent can remove piece.
+
+Queen
+=====
+Bishop + Rook
+
+Bishop
+======
+2-D diagonals, 3-D diagonals, 4-D diagonals...
+
+
+Rook
+====
+Change one of any coordinate by any number as long as there is nothing in the way.
+
+Knight
+======
+(Change of one coordinate by 2 or 1) and (Change a different coordinate by 2 or 1 but not same as original)
+
+Pawn
+====
+If at start, go 'front' by 2 or 1, else go 'front' by 1 or signal front-diagonal move if a piece is killed with the
+move.
+
+'front' - 1 dimensional linear movement?
+a dimension change allowed only for killing.
+
+if it gets to the starting dimension of opponent, turn to queen.
