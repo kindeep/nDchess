@@ -3,9 +3,11 @@
 //
 
 #include "Queen.h"
+#include "Bishop.h"
+#include "Rook.h"
 
 bool Queen::check_valid_move(board &_board, coordinate start, coordinate end) {
-    return false;
+    return Bishop::check_valid_move(_board, start, end) || Rook::check_valid_move(_board, start, end);
 }
 
 std::vector<coordinate> Queen::get_valid_moves(int piece, coordinate pos) {
