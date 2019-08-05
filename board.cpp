@@ -9,6 +9,7 @@
 #include "pieces/King.h"
 #include "pieces/Rook.h"
 #include "pieces/Bishop.h"
+#include "pieces/Knight.h"
 
 board::~board() = default;
 
@@ -242,7 +243,7 @@ bool board::check_valid_move(coordinate start, coordinate end) {
             break;
         case KNIGHT_B:
         case KNIGHT_W:
-            check = Bishop::check_valid_move;
+            check = Knight::check_valid_move;
             break;
         default:
             return false;
