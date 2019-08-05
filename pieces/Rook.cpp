@@ -8,6 +8,7 @@ bool Rook::check_valid_move(board &_board, coordinate start, coordinate end) {
     // change any one
 
     bool changed = false;
+    int change_index = -1;
 
     for (int d = 0; d < start.dim(); d++) {
         int cs = start.get(d);
@@ -18,11 +19,28 @@ bool Rook::check_valid_move(board &_board, coordinate start, coordinate end) {
                 return false;
             } else {
                 changed = true;
+                change_index = d;
             }
         }
     }
 
-    return true;
+    // at this point, the move is valid. just check if something is in the way.
+
+    int cfrom = start.get(change_index);
+    int cto = start.get(change_index);
+
+
+    coordinate crd_copy = coordinate(start.vals());
+    for (int i = std::min(cfrom, cto) + 1; i < std::max(cfrom, cto); i++) {
+        crd_copy.set(change_index, i);
+        if (_board.isOccupied(crd_copy)) {
+            return false;
+        }
+    }
+
+    // we know the boxes in the way are not occupied. now need to check if the box at the end is opponent or empty
+
+    return !_board.isOccupied(end) || _board.opponentPieces(start, end);
 }
 
 std::vector<coordinate> Rook::get_valid_moves(int piece, coordinate pos) {

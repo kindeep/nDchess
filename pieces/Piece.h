@@ -8,6 +8,7 @@
 
 #include "../coordinate.h"
 #include "../board.h"
+#include <cmath>
 
 class Piece {
 public:

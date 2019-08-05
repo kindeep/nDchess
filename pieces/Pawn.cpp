@@ -5,8 +5,6 @@
 #include "Pawn.h"
 
 bool Pawn::check_valid_move(board &_board, coordinate start, coordinate end) {
-    std::cout << "Yes it works" << std::endl;
-
     int dimension = start.dim();
     // assuming start and end are in the same dimensions. possibly adjust them to be so.
 
