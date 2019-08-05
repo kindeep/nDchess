@@ -19,10 +19,23 @@ coordinate parse_coordinate_input(std::string input) {
     return coord;
 }
 
-void prompt(std::string) {
+coordinate parse_coordinate_input(std::string input, int dimensions) {
+//    std::cout<< "Trying to parse " << input << std::endl;
+    auto obj = nj::json::parse(input);
 
+    std::vector<int> coord = obj;
+
+//    std::cout << "After json parse: " << std::endl;
+
+//    for (int i : obj) {
+//        std::cout << i << std::endl;
+//    }
+
+    coordinate c = coordinate(coord, dimensions);
+
+//    std::cout << c.to_string() << std::endl;
+    return coord;
 }
-
 
 int main() {
     // json test
@@ -59,7 +72,7 @@ int main() {
     std::string in = "";
 
     while (in != "exit") {
-        std::cout << "Move? " << std::endl;
+        std::cout << "Move? (y/exit):" << std::endl;
         std::cin >> in;
 
         if (in == "y") {
@@ -68,8 +81,9 @@ int main() {
             std::cin >> start_json;
             std::cout << "End: ";
             std::cin >> end_json;
-            coordinate start = parse_coordinate_input(start_json);
-            coordinate end = parse_coordinate_input(end_json);
+            coordinate start = parse_coordinate_input(start_json, dimensions);
+            coordinate end = parse_coordinate_input(end_json, dimensions);
+            std::cout << "Move " << game_board.cell_as_string(start)  << " to " << game_board.cell_as_string(end) << std::endl;
             std::cout << "Valid move? " << game_board.check_valid_move(start, end) << std::endl;
             game_board.execute_move(start, end);
         }

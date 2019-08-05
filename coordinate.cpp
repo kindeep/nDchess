@@ -4,6 +4,8 @@
 
 #include "coordinate.h"
 
+// def need destructor btw.
+
 coordinate::coordinate(std::vector<int> coord) : val(coord), dimension(coord.size()) {
 }
 
@@ -80,6 +82,10 @@ coordinate coordinate::add(coordinate a, coordinate b) {
 
 std::vector<int> coordinate::vals() {
     return val;
+}
+
+void coordinate::set(int index, int value) {
+    if(index < dim()) val[index] = value;
 }
 
 

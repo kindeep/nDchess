@@ -16,6 +16,15 @@ Bishop
 ======
 2-D diagonals, 3-D diagonals, 4-D diagonals...
 
+2-D - x and y both change by the same amount
+
+3-D - two or more (xy, yz, zx, xyz) change by the same amount
+
+4-D - ^?
+
+3d = 2d + all change by same amt
+
+4d = 3d + all change by same amt
 
 Rook
 ====
@@ -34,3 +43,9 @@ move.
 a dimension change allowed only for killing.
 
 if it gets to the starting dimension of opponent, promote.
+
+1-d: move in x, kill in xy by  1only
+
+2-d: move in x, kill in xy, yz, zx or xyz by 1 only
+
+3-d: ...

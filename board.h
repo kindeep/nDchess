@@ -73,6 +73,8 @@ public:
 
     std::string piece_as_string(int piece);
 
+    std::string cell_as_string(coordinate c);
+
 //    void setAll(int dim, int pos, int val);
 
     void setAll(coordinate crd_ltr, int val);
@@ -83,11 +85,21 @@ public:
 
     void execute_move(coordinate start, coordinate end);
 
-    bool isOccupied(coordinate &c);
+//    bool isOccupied(coordinate &c);
 
-    bool isOccupiedBlack(coordinate &c);
+    bool isOccupied(coordinate c);
 
-    bool isOccupiedWhite(coordinate &c);
+//    bool isOccupiedBlack(coordinate &c);
+
+    bool isOccupiedBlack(coordinate c);
+
+//    bool isOccupiedWhite(coordinate &c);
+
+    bool isOccupiedWhite(coordinate c);
+
+    bool opponentPieces(coordinate c1, coordinate c2);
+
+    bool opponentPieces(int p1, int p2);
 
 };
 

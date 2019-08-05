@@ -31,6 +31,8 @@ public:
      */
     int get(int index);
 
+    void set(int index, int value);
+
     std::vector<int> vals();
 
     int dim();
@@ -46,17 +48,23 @@ public:
     std::string to_string() {
 //        std::cout<< "dimension: " << dim() << std::endl;
         std::string result;
-        for (int i = 0; i < dim(); i++) {
-            result += std::to_string(i) +  ": " + std::to_string(get(i)) + " ";
+        result = result + "[";
+        for (int i = 0; i < dim() - 1; i++) {
+//            result += std::to_string(i) +  ": " + std::to_string(get(i)) + " ";
+            result += std::to_string(get(i)) + ",";
         }
+        result += std::to_string(get(dim() - 1));
+        result = result + "]";
         return result;
     }
 
-    typedef int * iterator;
-    typedef const int * const_iterator;
+    typedef int *iterator;
+    typedef const int *const_iterator;
+
     iterator begin() {
         return &val[0];
     }
+
     iterator end() {
         return &val[dim() - 1];
     }

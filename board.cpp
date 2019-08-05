@@ -171,6 +171,7 @@ std::string board::piece_as_string(int piece) {
     return rep;
 }
 
+
 void board::foreach_c(coordinate crd_ltr, void (*f)(coordinate)) {
     coordinate inc = space_dimension - crd_ltr.dim();
 
@@ -250,16 +251,29 @@ bool board::check_valid_move(coordinate start, coordinate end) {
     return check(*this, start, end);
 }
 
-bool board::isOccupied(coordinate &c) {
+//bool board::isOccupied(coordinate &c) {
+//    return get(c) != EMPTY;
+//    // possibly add checks for if it's not some random value somehow not in enums
+//}
+
+bool board::isOccupied(coordinate c) {
     return get(c) != EMPTY;
     // possibly add checks for if it's not some random value somehow not in enums
 }
 
-bool board::isOccupiedBlack(coordinate &c) {
+//bool board::isOccupiedBlack(coordinate &c) {
+//    return BLACK_PIECES.find(get(c)) != BLACK_PIECES.end();
+//}
+
+bool board::isOccupiedBlack(coordinate c) {
     return BLACK_PIECES.find(get(c)) != BLACK_PIECES.end();
 }
 
-bool board::isOccupiedWhite(coordinate &c) {
+//bool board::isOccupiedWhite(coordinate &c) {
+//    return WHITE_PIECES.find(get(c)) != WHITE_PIECES.end();
+//}
+
+bool board::isOccupiedWhite(coordinate c) {
     return WHITE_PIECES.find(get(c)) != WHITE_PIECES.end();
 }
 
@@ -268,9 +282,25 @@ std::vector<coordinate> board::get_valid_moves(int piece, coordinate pos) {
 }
 
 void board::execute_move(coordinate start, coordinate end) {
-    if(check_valid_move(start, end)) {
+    if (check_valid_move(start, end)) {
         set(end, get(start));
+        set(start, EMPTY);
     }
 }
+
+bool board::opponentPieces(int p1, int p2) {
+    return
+            (BLACK_PIECES.find(p1) != BLACK_PIECES.end() && WHITE_PIECES.find(p2) != WHITE_PIECES.end()) ||
+            (BLACK_PIECES.find(p2) != BLACK_PIECES.end() && WHITE_PIECES.find(p1) != WHITE_PIECES.end());
+}
+
+bool board::opponentPieces(coordinate c1, coordinate c2) {
+    return opponentPieces(get(c1), get(c2));
+}
+
+std::string board::cell_as_string(coordinate c) {
+    return piece_as_string(get(c)) + " at " + c.to_string();
+}
+
 
 
