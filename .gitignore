@@ -2,3 +2,8 @@
 *.iml
 testing/
 cmake-build-debug/
+CMakeCache.txt
+CMakeFiles/
+Makefile
+build/
+cmake_install.cmake
