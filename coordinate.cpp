@@ -78,5 +78,9 @@ coordinate coordinate::add(coordinate a, coordinate b) {
     return coordinate(cord, a.dim() + b.dim());
 }
 
+std::vector<int> coordinate::vals() {
+    return val;
+}
+
 
 

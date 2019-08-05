@@ -3,6 +3,12 @@
 //
 
 #include "board.h"
+#include "pieces/Piece.h"
+#include "pieces/Pawn.h"
+#include "pieces/Queen.h"
+#include "pieces/King.h"
+#include "pieces/Rook.h"
+#include "pieces/Bishop.h"
 
 board::~board() = default;
 
@@ -12,7 +18,7 @@ board::board(int dimension) {
     int num_elements = (int) std::pow(space_size, dimension);
 
     this->board_data = std::vector<int>();
-
+    board_data.reserve((int) pow(space_size, dimension));
     for (int i = 0; i < pow(space_size, dimension); i++) {
         board_data.push_back(EMPTY);
     }
@@ -163,11 +169,6 @@ std::string board::piece_as_string(int piece) {
             rep = "???";
     }
     return rep;
-
-}
-
-void board::setAll(int dim, int pos, int val) {
-
 }
 
 void board::foreach_c(coordinate crd_ltr, void (*f)(coordinate)) {
@@ -183,6 +184,15 @@ void board::foreach_c(coordinate crd_ltr, void (*f)(coordinate)) {
 // crd_ltr - coordinate left to right...
 // coordinates that will be set: [ltr, , , , ]
 // all iterations keeping ltr and dimension fixed.
+/**
+ *
+ * Set all sub-dimensions of crd_ltr to val
+ *
+ * e.g. for a 5 dimensional space, if crd_ltr = {1,2}, set all coordinates in the form {1,2,x,x,x} to val.
+ *
+ * @param crd_ltr
+ * @param val
+ */
 void board::setAll(coordinate crd_ltr, int val) {
     coordinate a_coord = coordinate(space_dimension - crd_ltr.dim());
 //    std::cout <<  "LTR: " << crd_ltr.to_string() << std::endl;
@@ -195,3 +205,72 @@ void board::setAll(coordinate crd_ltr, int val) {
 
     }
 }
+
+/**
+ * Check if a move from start coordinate to end coordinate is valid for a given piece.
+ *
+ * @param piece
+ * @param start
+ * @param end
+ * @return
+ */
+bool board::check_valid_move(coordinate start, coordinate end) {
+    bool (*check)(board &, coordinate, coordinate);
+
+    // Mostly just wanted to try out function pointers here. not exactly a great idea.
+    switch (get(start)) {
+        case PAWN_B:
+        case PAWN_W:
+            check = Pawn::check_valid_move;
+            break;
+        case QUEEN_B:
+        case QUEEN_W:
+            check = Queen::check_valid_move;
+            break;
+        case KING_B:
+        case KING_W:
+            check = King::check_valid_move;
+            break;
+        case ROOK_W:
+        case ROOK_B:
+            check = Rook::check_valid_move;
+            break;
+        case BISHOP_B:
+        case BISHOP_W:
+            check = Bishop::check_valid_move;
+            break;
+        case KNIGHT_B:
+        case KNIGHT_W:
+            check = Bishop::check_valid_move;
+            break;
+        default:
+            return false;
+    }
+
+    return check(*this, start, end);
+}
+
+bool board::isOccupied(coordinate &c) {
+    return get(c) != EMPTY;
+    // possibly add checks for if it's not some random value somehow not in enums
+}
+
+bool board::isOccupiedBlack(coordinate &c) {
+    return BLACK_PIECES.find(get(c)) != BLACK_PIECES.end();
+}
+
+bool board::isOccupiedWhite(coordinate &c) {
+    return WHITE_PIECES.find(get(c)) != WHITE_PIECES.end();
+}
+
+std::vector<coordinate> board::get_valid_moves(int piece, coordinate pos) {
+    return std::vector<coordinate>();
+}
+
+void board::execute_move(coordinate start, coordinate end) {
+    if(check_valid_move(start, end)) {
+        set(end, get(start));
+    }
+}
+
+

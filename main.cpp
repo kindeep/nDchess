@@ -7,7 +7,7 @@
 
 std::string time_filename;
 
-void write_log(const std::string& to_write) {
+void write_log(const std::string &to_write) {
     std::ofstream log;
     log.open("/Users/kindeep/Projects/nDchess/testing/test_log", std::ios_base::app); // open file in append mode
     log << to_write;
@@ -16,7 +16,8 @@ void write_log(const std::string& to_write) {
 
 void append_time(int n, double elapsed_secs) {
     std::ofstream times;
-    times.open("/Users/kindeep/Projects/nDchess/testing/" + time_filename, std::ios_base::app); // list of elapsed seconds
+    times.open("/Users/kindeep/Projects/nDchess/testing/" + time_filename,
+               std::ios_base::app); // list of elapsed seconds
     times << std::to_string(n) << "," << std::to_string(elapsed_secs) << "\n";
     times.close();
 }
@@ -42,11 +43,11 @@ int main() {
 //                             });
 //    std::cout << nml_cboard.board_as_string() << std::endl;
 
-    for (int dim = 1; dim < 8; dim++) {
+    for (int dim = 3; dim < 4; dim++) {
         auto start = std::chrono::system_clock::now();
         std::time_t start_dt = std::chrono::system_clock::to_time_t(start);
 
-        write_log("Initializing Board\nDimension: " + std::to_string(dim)+ "\nStarted at: " + std::ctime(&start_dt));
+        write_log("Initializing Board\nDimension: " + std::to_string(dim) + "\nStarted at: " + std::ctime(&start_dt));
 
         board test_board = board(dim);
         std::cout << dim << "-D Chess Board" << std::endl;
@@ -57,7 +58,8 @@ int main() {
 
         append_time(dim, elapsed_seconds.count());
 
-        write_log("Finished at: " + std::string(std::ctime(&end_dt)) + "Elapsed Seconds: " + std::to_string(elapsed_seconds.count()) + "\n\n");
+        write_log("Finished at: " + std::string(std::ctime(&end_dt)) + "Elapsed Seconds: " +
+                  std::to_string(elapsed_seconds.count()) + "\n\n");
     }
 
     std::time_t end_time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());

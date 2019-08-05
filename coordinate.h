@@ -31,6 +31,8 @@ public:
      */
     int get(int index);
 
+    std::vector<int> vals();
+
     int dim();
 
     void operator++();
@@ -48,6 +50,15 @@ public:
             result += std::to_string(i) +  ": " + std::to_string(get(i)) + " ";
         }
         return result;
+    }
+
+    typedef int * iterator;
+    typedef const int * const_iterator;
+    iterator begin() {
+        return &val[0];
+    }
+    iterator end() {
+        return &val[dim() - 1];
     }
 
 };

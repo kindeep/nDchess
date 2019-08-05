@@ -1,6 +1,12 @@
 King
 ====
-Change one of any coordinate by 1 for a move. Cannot move to a position where opponent can remove piece.
+Change at most two of any coordinate by 1 for a move. Cannot move to a position where opponent can remove piece.
+
+1-d change x by at most 1
+
+2-d change x or y by at most 1
+
+n-d change any coord by at most 1
 
 Queen
 =====
@@ -27,4 +33,4 @@ move.
 'front' - 1 dimensional linear movement?
 a dimension change allowed only for killing.
 
-if it gets to the starting dimension of opponent, turn to queen.
+if it gets to the starting dimension of opponent, promote.
