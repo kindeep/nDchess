@@ -114,6 +114,7 @@ std::string board::board_as_string() {
     int lbreak = 0;
     for (int val: board_data) {
         if (lbreak >= space_size) {
+//            result += " 000  001  002  003  004  005  006  007 ";
             result += '\n';
             lbreak = 0;
         };
