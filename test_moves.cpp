@@ -81,6 +81,8 @@ int main() {
             std::cin >> in;
 
             if (in == "y") {
+                std::cout << "Enter start and end coordinates in JSON array format. e.g. [1,2] for a 2d coordinate"
+                          << std::endl;
                 std::string start_json, end_json;
                 std::cout << "Start: ";
                 std::cin >> start_json;
