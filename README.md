@@ -2,9 +2,7 @@
 
 - - - - - - - - - - - 
 
-Under development.
-
-To be a C++ library to play chess on a chessboard of any number of dimensions.
+A version of chess generalized for any number of dimentions.
 
 
 ## Run CLI
